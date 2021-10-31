@@ -137,7 +137,7 @@ class Index {
         </thead>
         <tbody>
           <tr>
-            <td>利润总计</td><td>${profitValue - lossValue}</td>
+            <td>利润总计</td><td>${parseFloat((profitValue - lossValue).toFixed(4))}</td>
           </tr>
           ${walletCode}
           <tr>
