@@ -107,12 +107,13 @@ class Index {
       }
     );
     let lastUpdateDatetime = "";
-    let netProfit = 0;
-    for (let i = 0; i < dataSource.chart_data.length; i++) {
-      let chartData = dataSource.chart_data[i];
+    let profitValue = 0;
+    let lossValue = 0;
+    if (0 < dataSource.chart_data.length) {
       lastUpdateDatetime = dataSource.chart_data[dataSource.chart_data.length - 1].datetime;
       lastUpdateDatetime = lastUpdateDatetime.substring(5);
-      netProfit += (chartData.profit_value - chartData.loss_value);
+      profitValue = dataSource.chart_data[dataSource.chart_data.length - 1].profit_value;
+      lossValue = dataSource.chart_data[dataSource.chart_data.length - 1].loss_value;
     }
     let walletCode = "";
     for (let i = 0; i < dataSource.wallet_array.length; i++) {
@@ -136,11 +137,14 @@ class Index {
         </thead>
         <tbody>
           <tr>
-            <td>利润</td><td>$&nbsp;${netProfit.toFixed(4)}</td>
+            <td>浮盈</td><td>${profitValue}</td>
+          </tr>
+          <tr>
+            <td>浮亏</td><td>${lossValue}</td>
           </tr>
           ${walletCode}
           <tr>
-            <td>当前亏损数量</td><td>${dataSource.current_loss_amount}&nbsp;个</td>
+            <td>当前亏损</td><td>${dataSource.current_loss_amount}</td>
           </tr>
           <tr>
             <td>接收订单数量</td><td>${dataSource.receive_order_count}&nbsp;个</td>
@@ -276,13 +280,6 @@ class Index {
       lossRecord.push(chartData.loss_value);
       datetimeRecord.push(chartData.datetime);
     }
-      // debugger;
-      // for (let j = 0; j < chartData.wallet_array.length; j++) {
-      //   let wallet = chartData.wallet_array[j];
-      //   profitRecord.push(wallet.profit_value);
-      //   lossRecord.push(wallet.loss_value);
-      //   datetimeRecord.push(wallet.datetime);
-      // }
     let option = {
       color: [
         "#80a8ff", // 浮盈颜色
