@@ -137,10 +137,7 @@ class Index {
         </thead>
         <tbody>
           <tr>
-            <td>浮盈</td><td>${profitValue}</td>
-          </tr>
-          <tr>
-            <td>浮亏</td><td>${lossValue}</td>
+            <td>利润总计</td><td>${profitValue - lossValue}</td>
           </tr>
           ${walletCode}
           <tr>
